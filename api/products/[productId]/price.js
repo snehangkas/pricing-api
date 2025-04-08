@@ -6,7 +6,8 @@ export default function handler(req, res) {
     }
 
     try {
-        const { productId } = req.query;
+        // Get productId from the URL path parameter
+        const productId = req.url.split('/').slice(-2)[0];
         
         res.status(200).json({
             productId,

@@ -4,27 +4,11 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// CORS configuration
-const corsOptions = {
-    origin: [
-        'http://localhost:3000',
-        'http://localhost:3001',
-        'https://nextjs-builderio-starter-storefront-demos-flax.vercel.app',
-        'https://pricing-api-omega.vercel.app',
-        ...(process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [])
-    ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
-    exposedHeaders: ['Content-Range', 'X-Content-Range'],
-    credentials: true,
-    maxAge: 86400, // 24 hours
-    preflightContinue: false,
-    optionsSuccessStatus: 204
-};
+
 
 // Middleware
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, Origin, X-Requested-With');
     res.header('Access-Control-Allow-Credentials', 'true');

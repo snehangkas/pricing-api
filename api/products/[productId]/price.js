@@ -1,4 +1,7 @@
-const STATIC_PRICE = 99.99;
+// Function to generate random price between 50 and 150
+const generateRandomPrice = () => {
+    return (Math.random() * 100 + 50).toFixed(2);
+};
 
 export default function handler(req, res) {
     // Set CORS headers
@@ -26,7 +29,7 @@ export default function handler(req, res) {
         
         res.status(200).json({
             productId,
-            price: STATIC_PRICE.toFixed(2)
+            price: generateRandomPrice()
         });
     } catch (error) {
         res.status(500).json({

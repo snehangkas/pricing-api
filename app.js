@@ -20,18 +20,20 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-// Static price for all products
-const STATIC_PRICE = 99.99;
+// Function to generate random price between 50 and 150
+const generateRandomPrice = () => {
+    return (Math.random() * 100 + 50).toFixed(2);
+};
 
 // GET endpoint for product pricing
 app.get('/api/products/:productId/price', (req, res) => {
     try {
         const { productId } = req.params;
         
-        // Return the static price for any product ID
+        // Return a random price for any product ID
         res.json({
             productId,
-            price: STATIC_PRICE.toFixed(2)
+            price: generateRandomPrice()
         });
     } catch (error) {
         res.status(500).json({

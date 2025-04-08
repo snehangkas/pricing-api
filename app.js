@@ -14,13 +14,20 @@ const corsOptions = {
         ...(process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [])
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],
+    credentials: true,
+    maxAge: 86400, // 24 hours
+    preflightContinue: false,
+    optionsSuccessStatus: 204
 };
 
 // Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
+
+// Handle OPTIONS requests
+app.options('*', cors(corsOptions));
 
 // Static price for all products
 const STATIC_PRICE = 99.99;

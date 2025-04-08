@@ -6,7 +6,13 @@ const port = process.env.PORT || 3000;
 
 // CORS configuration
 const corsOptions = {
-    origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : '*',
+    origin: [
+        'http://localhost:3000',
+        'http://localhost:3001',
+        'https://nextjs-builderio-starter-storefront-demos-flax.vercel.app',
+        'https://pricing-api-omega.vercel.app',
+        ...(process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [])
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
